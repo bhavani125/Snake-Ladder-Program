@@ -5,6 +5,8 @@ public class SnakeAndLadder
 		System.out.println("Welcome to Snake And Ladder Simulation Program");
 		// Local variable
 		int playerPosition = 0;	
-		System.out.println("Starting position of a single player is " + playerPosition );
+        int die = (int) (Math.floor(Math.random() * 10) % 6 + 1);
+		System.out.println("Dice roll: " + die);
 	}
-}
+}	
+	
