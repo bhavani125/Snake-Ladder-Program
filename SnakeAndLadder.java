@@ -5,37 +5,88 @@ public class SnakeAndLadder
 	public static final int WinningPosition = 100;
 	public static void main(String[] args)
 	{
-		// Local variable
-		int playerPosition = 0;
-		int dieCounter = 0;
-		System.out.print("Enter player name: ");
+		// local variable
+		int player1Pos = 0;
+        int player2Pos = 0;
 		Scanner s = new Scanner(System.in);
-		String playerName = s.next();
-		System.out.println("Player name: " + playerName);
-		while ( playerPosition < WinningPosition) 
+        System.out.print("Enter first player name : ");
+        String player1Name = s.next();
+        System.out.print("Enter second player name : ");
+        String player2Name = s.next();
+        while (player1Pos <= WinningPosition && player2Pos <= WinningPosition)
 		{
-		  int die = (int) (Math.floor(Math.random() * 10) % 6 + 1);
-		  dieCounter++;
-		  int Position = WinningPosition - playerPosition;
-		  int option = (int) (Math.floor(Math.random() * 10) % 3);
-		  if( Position >= die )
-	      {
-		    switch (option)
-		    {
-			  case 0:
-				playerPosition += 0;
-				break;
-			  case 1:
-				playerPosition += die;
-				break;
-			  default:
-				playerPosition -= die;
-				if (playerPosition < 0)
-					playerPosition = 0;
-      	    }
-		  } 
-		 System.out.println("Player position: " + playerPosition);
-		} 
-		  System.out.println("Dice was rolled  for " + dieCounter + " times.");
-	}
+            if (player1Pos == WinningPosition)
+			{
+                System.out.println(player1Name + " is winner");
+                break;
+            }
+			else if (player2Pos == WinningPosition) 
+			{
+                System.out.println(player2Name + " is winner");
+                break;
+            }
+			else
+			{
+                player1Pos = player1(player1Pos, player1Name);
+                player2Pos = player2(player2Pos, player2Name);
+            }
+        }
+    }
+    private static int player1(int player1Position, String player1Name) 
+	{
+        int die = (int) (Math.floor(Math.random() * 10) % 6 + 1);
+        int Position = WinningPosition - player1Position;
+        int option = (int) (Math.floor(Math.random() * 10) % 3);
+        if (Position >= die)
+		{
+            switch (option)
+			{
+                case 0:
+     				player1Position += 0;
+                    break;
+                case 1:
+                    player1Position += die;
+                    if (player1Position == WinningPosition)
+                        break;
+                    else
+                        player1(player1Position, player1Name);
+                    break;
+                default:
+                    player1Position -= die;
+                    if (player1Position < 0)
+                        player1Position = 0;
+            }
+            System.out.println(player1Name + " position: " + player1Position);
+        }
+        return player1Position;
+    }
+
+    private static int player2(int player2Position, String player2Name) {
+        int die = (int) (Math.floor(Math.random() * 10) % 6 + 1);
+        int Position = WinningPosition - player2Position;
+        int option = (int) (Math.floor(Math.random() * 10) % 3);
+        if (Position >= die) 
+		{
+            switch (option)
+			{
+                case 0:
+				     player2Position += 0;
+                     break;
+                case 1:
+                    player2Position += die;
+                    if (player2Position == WinningPosition)
+                        break;
+                    else
+                        player2(player2Position, player2Name);
+                    break;
+                default:
+                    player2Position -= die;
+                    if (player2Position < 0)
+                        player2Position = 0;
+            }
+        }
+        System.out.println(player2Name + " position: " + player2Position);
+        return player2Position;
+    }
+
 }
