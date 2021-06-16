@@ -7,31 +7,35 @@ public class SnakeAndLadder
 	{
 		// Local variable
 		int playerPosition = 0;
+		int dieCounter = 0;
 		System.out.print("Enter player name: ");
 		Scanner s = new Scanner(System.in);
 		String playerName = s.next();
 		System.out.println("Player name: " + playerName);
-		while ( playerPosition < WinningPostion )
-    	{
-	    	int die = (int) (Math.floor(Math.random() * 10) % 6 + 1);
-		    int option = (int) (Math.floor(Math.random() * 10) % 3);
-		    switch (option) 
-			{
+		while ( playerPosition < WinningPosition) 
+		{
+		  int die = (int) (Math.floor(Math.random() * 10) % 6 + 1);
+		  dieCounter++;
+		  int Position = WinningPosition - playerPosition;
+		  int option = (int) (Math.floor(Math.random() * 10) % 3);
+		  if( Position >= die )
+	      {
+		    switch (option)
+		    {
 			  case 0:
-				System.out.println("No play : " + 0);
 				playerPosition += 0;
 				break;
 			  case 1:
-				System.out.println("Ladder  : " + "+" + die);
 				playerPosition += die;
 				break;
 			  default:
-				System.out.println("Snake   : " + "-" + die);
 				playerPosition -= die;
 				if (playerPosition < 0)
 					playerPosition = 0;
-		    }
-		}
-		System.out.println("Player position: " + playerPosition);
+      	    }
+		  } 
+		 System.out.println("Player position: " + playerPosition);
+		} 
+		  System.out.println("Dice was rolled  for " + dieCounter + " times.");
 	}
 }
